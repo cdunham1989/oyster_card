@@ -33,4 +33,10 @@ describe Oystercard do
     oystercard.touch_in
     expect(oystercard.in_journey).to eq(true)
   end
+
+  it 'allows us to touch out' do
+    oystercard.touch_in
+    oystercard.touch_out
+    expect(oystercard.in_journey).to eq(false)
+  end
 end
