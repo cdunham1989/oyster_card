@@ -14,4 +14,8 @@ class Oystercard
     @balance += amount
     # @balance = @balance + amount
   end
+
+  def deduct(amount)
+    @balance -= amount
+  end
 end
