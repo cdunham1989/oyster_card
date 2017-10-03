@@ -21,10 +21,6 @@ describe Oystercard do
       oystercard.top_up(max_balance)
       expect { oystercard.top_up(4) }.to raise_error "Max balance of #{max_balance} exceeded!"
     end
-
-    it 'changes balance when topped up' do
-      expect { oystercard.deduct 2 }.to change { oystercard.balance }.by (-2)
-    end
   end
 
   context 'journey status' do
@@ -43,6 +39,12 @@ describe Oystercard do
       oystercard.touch_in
       oystercard.touch_out
       expect(oystercard.in_journey).to eq(false)
+    end
+  end
+
+  context 'charging the card' do
+    it 'should reduce the balance by minimum fare on touch out' do
+      expect { oystercard.touch_out }.to change { oystercard.balance }.by (-Oystercard::MIN_FARE)
     end
   end
 
