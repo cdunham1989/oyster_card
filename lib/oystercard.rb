@@ -1,6 +1,6 @@
 # pointless comment for rubocop
 class Oystercard
-  attr_reader :balance, :in_journey
+  attr_reader :balance, :in_journey, :entry_station
 
   MAX_BALANCE = 90
   MIN_BALANCE = 1
@@ -18,20 +18,24 @@ class Oystercard
     @balance += amount
   end
 
-  def touch_in
+  def in_journey?
+    !!entry_station
+  end
+
+  def touch_in(station)
     raise "Insufficient funds!" if @balance < @min_balance
-    @in_journey = true
+    @entry_station = station
   end
 
   def touch_out
     deduct(MIN_FARE)
-    @in_journey = false
+    @entry_station = nil
   end
 
-private
+  private
 
-def deduct(amount)
-  @balance -= amount
-end
+  def deduct(amount)
+    @balance -= amount
+  end
 
 end
