@@ -8,17 +8,16 @@ describe Oystercard do
   end
 
   it 'can be topped up' do
-     expect(oystercard).to respond_to(:top_up).with(1).argument
+    expect(oystercard).to respond_to(:top_up).with(1).argument
   end
 
   it 'changes balance when topped up' do
-    expect{ oystercard.top_up 2 }.to change{ oystercard.balance }.by 2
+    expect { oystercard.top_up 2 }.to change { oystercard.balance }.by 2
   end
 
   it 'prevents balance exceeding 90' do
     max_balance = Oystercard::MAX_BALANCE
     oystercard.top_up(max_balance)
-    expect {oystercard.top_up(4)}.to raise_error "Max balance of #{:max_balance} exceeded!"
+    expect { oystercard.top_up(4) }.to raise_error "Max balance of #{max_balance} exceeded!"
   end
-
 end

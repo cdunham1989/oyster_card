@@ -1,3 +1,4 @@
+# pointless comment for rubocop
 class Oystercard
   attr_reader :balance
 
@@ -9,9 +10,8 @@ class Oystercard
   end
 
   def top_up(amount)
-    raise "Max balance of #{:max_balance} exceeded!" if balance + amount > @max_balance
+    raise "Max balance of #{@max_balance} exceeded!" if balance + amount > @max_balance
     @balance += amount
-    #@balance = @balance + amount
+    # @balance = @balance + amount
   end
-
 end
