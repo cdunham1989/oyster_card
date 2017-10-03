@@ -33,14 +33,22 @@ describe Oystercard do
     end
 
     it 'allows us to touch in' do
+      oystercard.top_up(1)
       oystercard.touch_in
       expect(oystercard.in_journey).to eq(true)
     end
 
     it 'allows us to touch out' do
+      oystercard.top_up(1)
       oystercard.touch_in
       oystercard.touch_out
       expect(oystercard.in_journey).to eq(false)
+    end
+  end
+
+  context 'error raising' do
+    it 'raises an error if touching in when balance is too low' do
+      expect { oystercard.touch_in }.to raise_error('Insufficient funds!')
     end
   end
 end
