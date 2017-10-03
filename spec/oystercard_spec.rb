@@ -24,4 +24,8 @@ describe Oystercard do
   it 'changes balance when topped up' do
     expect { oystercard.deduct 2 }.to change { oystercard.balance }.by -2
   end
+
+  it 'tells us if a journey is in progress' do
+    expect(oystercard.in_journey).to eq(true).or eq(false)
+  end
 end
