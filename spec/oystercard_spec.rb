@@ -28,4 +28,9 @@ describe Oystercard do
   it 'tells us if a journey is in progress' do
     expect(oystercard.in_journey).to eq(true).or eq(false)
   end
+
+  it 'allows us to touch in' do
+    oystercard.touch_in
+    expect(oystercard.in_journey).to eq(true)
+  end
 end
