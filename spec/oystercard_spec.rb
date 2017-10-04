@@ -25,21 +25,26 @@ describe Oystercard do
   end
 
   context 'journey status' do
+    let(:entry_station) { double :station }
+    let(:exit_station) { double :station }
+
     it 'tells us if a journey is in progress' do
       expect(oystercard.in_journey).to eq(true).or eq(false)
     end
 
     it 'allows us to touch out' do
       oystercard.top_up(1)
-      oystercard.touch_in(station)
-      oystercard.touch_out
-      expect(oystercard.in_journey).not_to eq nil
+      oystercard.touch_in(entry_station)
+      oystercard.touch_out(exit_station)
+      expect(oystercard.exit_station).to eq exit_station
     end
   end
 
   context 'charging the card' do
+    let(:exit_station) { double :station }
+
     it 'should reduce the balance by minimum fare on touch out' do
-      expect { oystercard.touch_out }.to change { oystercard.balance }.by(-Oystercard::MIN_FARE)
+      expect { oystercard.touch_out(exit_station) }.to change { oystercard.balance }.by(-Oystercard::MIN_FARE)
     end
   end
 
@@ -50,10 +55,12 @@ describe Oystercard do
   end
 
   context 'station storing' do
+    let(:entry_station) { double :station }
+
     it 'stores the entry station' do
       oystercard.top_up(5)
-      oystercard.touch_in(station)
-      expect(subject.entry_station).to eq station
+      oystercard.touch_in(entry_station)
+      expect(subject.entry_station).to eq entry_station
     end
   end
 end
