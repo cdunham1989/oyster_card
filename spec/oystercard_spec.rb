@@ -32,6 +32,10 @@ describe Oystercard do
       expect(oystercard.in_journey).to eq(true).or eq(false)
     end
 
+    it 'has an empty list of journeys by default' do
+      expect(subject.journeys).to be_empty
+    end
+
     it 'allows us to touch out' do
       oystercard.top_up(1)
       oystercard.touch_in(entry_station)
