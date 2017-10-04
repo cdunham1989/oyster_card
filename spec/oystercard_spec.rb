@@ -2,7 +2,7 @@ require 'oystercard'
 
 describe Oystercard do
   subject(:oystercard) { described_class.new }
-  let (:station) { double :station }
+  let(:station) { double :station }
 
   context 'managing balance' do
     it 'a new card has a balance of 0' do
@@ -39,7 +39,7 @@ describe Oystercard do
 
   context 'charging the card' do
     it 'should reduce the balance by minimum fare on touch out' do
-      expect { oystercard.touch_out }.to change { oystercard.balance }.by (-Oystercard::MIN_FARE)
+      expect { oystercard.touch_out }.to change { oystercard.balance }.by(-Oystercard::MIN_FARE)
     end
   end
 

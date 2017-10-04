@@ -23,7 +23,7 @@ class Oystercard
   end
 
   def touch_in(station)
-    raise "Insufficient funds!" if @balance < @min_balance
+    raise 'Insufficient funds!' if @balance < @min_balance
     @entry_station = station
   end
 
@@ -37,5 +37,4 @@ class Oystercard
   def deduct(amount)
     @balance -= amount
   end
-
 end
