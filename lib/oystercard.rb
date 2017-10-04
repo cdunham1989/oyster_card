@@ -1,17 +1,17 @@
 # pointless comment for rubocop
 class Oystercard
-  attr_reader :balance, :in_journey, :entry_station, :exit_station, :journeys
+  attr_reader :balance, :in_journey, :entry_station, :journeys
 
   MAX_BALANCE = 90
   MIN_BALANCE = 1
   MIN_FARE = 1
 
-  def initialize(balance = 0, max_balance = MAX_BALANCE, in_journey = false, min_balance = MIN_BALANCE, journeys = {})
-    @balance = balance
-    @max_balance = max_balance
-    @min_balance = min_balance
-    @in_journey = in_journey
-    @journeys = journeys
+  def initialize
+    @balance = 0
+    @max_balance = MAX_BALANCE
+    @min_balance = MIN_BALANCE
+    @in_journey = false
+    @journeys = []
   end
 
   def top_up(amount)
@@ -30,8 +30,8 @@ class Oystercard
 
   def touch_out(exit_station)
     deduct(MIN_FARE)
+    @journeys << { entry_station: @entry_station, exit_station: exit_station }
     @entry_station = nil
-    @exit_station = exit_station
   end
 
   private

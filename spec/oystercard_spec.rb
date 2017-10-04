@@ -25,6 +25,7 @@ describe Oystercard do
   end
 
   context 'journey status' do
+    let(:journey){ { entry_station: entry_station, exit_station: exit_station } }
     let(:entry_station) { double :station }
     let(:exit_station) { double :station }
 
@@ -36,11 +37,11 @@ describe Oystercard do
       expect(subject.journeys).to be_empty
     end
 
-    it 'allows us to touch out' do
+    it 'stores a journey' do
       oystercard.top_up(1)
-      oystercard.touch_in(entry_station)
-      oystercard.touch_out(exit_station)
-      expect(oystercard.exit_station).to eq exit_station
+      subject.touch_in(entry_station)
+      subject.touch_out(exit_station)
+      expect(subject.journeys).to include journey
     end
   end
 
