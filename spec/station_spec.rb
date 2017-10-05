@@ -1,9 +1,7 @@
 require 'station'
 
 describe Station do
-
   subject { described_class.new(name: "Bank", zone: 1) }
-
   it 'knows its name' do
     expect(subject.name).to eq("Bank")
   end

@@ -1,15 +1,8 @@
 # pointless comment for rubocop
 class Station
+  attr_reader :name, :zone
 
-  def initialize(info)
-    @info = info
-  end
-
-  def name
-    @info[:name]
-  end
-
-  def zone
-    @info[:zone]
+  def initialize(name:, zone:)
+    @name, @zone = name, zone
   end
 end
